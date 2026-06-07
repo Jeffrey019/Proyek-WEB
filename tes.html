@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FindIt! Mikroskil – Daftar Barang</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/tes.css"/>
+  <style>
+    .toolbar {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      align-items: center; margin-bottom: 18px;
+    }
+    .toolbar input {
+      flex: 1; min-width: 180px;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      padding: 9px 13px; font-family: var(--font-b); font-size: 0.875rem;
+      color: var(--dark); background: #fff; outline: none; transition: border-color .2s;
+    }
+    .toolbar input:focus { border-color: var(--blue2); }
+    .toolbar input::placeholder { color: #bbb; }
+    .toolbar select {
+      border: 1.5px solid var(--border); border-radius: 8px;
+      padding: 9px 12px; font-family: var(--font-b); font-size: 0.85rem;
+      color: var(--dark); background: #fff; outline: none; cursor: pointer;
+    }
+    .tbl-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 8px; margin-top: 12px;
+      font-size: 0.8rem; color: var(--gray);
+    }
+    .btn-danger {
+      background: #fee2e2; color: var(--red); border: none;
+      border-radius: 8px; padding: 8px 14px; font-family: var(--font-b);
+      font-size: 0.8rem; font-weight: 600; cursor: pointer;
+    }
+    .btn-danger:hover { background: #fca5a5; }
+
+    .tipe-badge {
+      display: inline-block; padding: 2px 9px; border-radius: 99px;
+      font-size: 0.7rem; font-weight: 700;
+    }
+    .tipe-hilang  { background: #fee2e2; color: var(--red); }
+    .tipe-temuan  { background: #dcfce7; color: var(--green); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="index.html">FindIt<span class="brand-dot">!</span> Mikroskil</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Beranda</a></li>
+    <li><a href="lapor.html">Lapor Barang</a></li>
+    <li><a href="daftar.html" class="active">Daftar Barang</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header">
+  <h1>Daftar <em>Barang</em></h1>
+  <p>Semua laporan barang hilang dan temuan di Mikroskil</p>
+</div>
+
+<main>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-val" id="s-total">0</div>
+      <div class="stat-lbl">Total Laporan</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="s-hilang">0</div>
+      <div class="stat-lbl">Masih Hilang</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="s-selesai">0</div>
+      <div class="stat-lbl">Berhasil Diklaim</div>
+    </div>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <input type="text" id="search" placeholder="🔍 Cari nama barang, lokasi, atau ID..."/>
+    <select id="filter-tipe">
+      <option value="">Semua Tipe</option>
+      <option value="Hilang">😟 Hilang</option>
+      <option value="Temuan">🤲 Temuan</option>
+    </select>
+    <select id="filter-status">
+      <option value="">Semua Status</option>
+      <option value="Hilang">Hilang</option>
+      <option value="Ditemukan">Ditemukan</option>
+      <option value="Diklaim">Diklaim</option>
+    </select>
+    <select id="filter-kat">
+      <option value="">Semua Kategori</option>
+      <option>Elektronik</option>
+      <option>Dompet & Tas</option>
+      <option>KTM / Kartu</option>
+      <option>Kunci</option>
+      <option>Buku & Alat Tulis</option>
+      <option>Pakaian</option>
+      <option>Lainnya</option>
+    </select>
+    <a href="lapor.html" class="btn btn-primary" style="white-space:nowrap;">+ Lapor Barang</a>
+  </div>
+
+  <!-- TABEL -->
+  <div class="card" style="padding:0;">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tipe</th>
+            <th>Barang</th>
+            <th>Kategori</th>
+            <th>Lokasi</th>
+            <th>Tanggal</th>
+            <th>Pelapor</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="tbl-footer">
+    <span id="tbl-info">Menampilkan 0 data</span>
+    <button class="btn-danger" id="btn-reset">🗑️ Hapus Semua Data</button>
+  </div>
+
+</main>
+
+<footer>
+  <strong>FindIt! Mikroskil</strong> &mdash; Platform Lost & Found Universitas Mikroskil &bull; 2025
+</footer>
+<div id="toasts"></div>
+
+<!-- MODAL DETAIL -->
+<div class="overlay" id="overlay-detail">
+  <div class="modal" style="max-width:500px;">
+    <div class="modal-h">
+      Detail Laporan
+      <button class="modal-x" id="detail-close">✕</button>
+    </div>
+    <div id="detail-body"></div>
+    <button class="btn btn-primary" id="detail-close2" style="width:100%;margin-top:16px;">Tutup</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  initNav();
+
+  const KAT_ICON = {
+    'Elektronik':'💻','Dompet & Tas':'👜','KTM / Kartu':'🪪',
+    'Kunci':'🔑','Buku & Alat Tulis':'📚','Pakaian':'👕','Lainnya':'📦'
+  };
+
+  function getData()   { return JSON.parse(localStorage.getItem('fi_data') || '[]'); }
+  function saveData(d) { localStorage.setItem('fi_data', JSON.stringify(d)); }
+
+  // ── RENDER ──
+  function render() {
+    const data    = getData();
+    const q       = document.getElementById('search').value.toLowerCase();
+    const tipe    = document.getElementById('filter-tipe').value;
+    const status  = document.getElementById('filter-status').value;
+    const kat     = document.getElementById('filter-kat').value;
+
+    const filtered = data.filter(r => {
+      const mQ = r.barang.toLowerCase().includes(q) ||
+                 r.lokasi.toLowerCase().includes(q) ||
+                 r.id.toLowerCase().includes(q) ||
+                 r.nama.toLowerCase().includes(q);
+      const mT = tipe   ? r.tipe === tipe       : true;
+      const mS = status ? r.status === status   : true;
+      const mK = kat    ? r.kategori === kat    : true;
+      return mQ && mT && mS && mK;
+    });
+
+    const tbody = document.getElementById('tbody');
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="9">
+        <div class="empty">
+          <div class="e-ico">📭</div>
+          <p>Tidak ada laporan. <a href="lapor.html" style="color:var(--blue2)">Buat laporan →</a></p>
+        </div>
+      </td></tr>`;
+    } else {
+      tbody.innerHTML = filtered.slice().reverse().map(r => `
+        <tr class="row-in" style="cursor:pointer;" onclick="showDetail('${r.id}')">
+          <td><strong style="color:var(--blue2);font-size:0.82rem;">${r.id}</strong></td>
+          <td>
+            <span class="tipe-badge ${r.tipe === 'Hilang' ? 'tipe-hilang' : 'tipe-temuan'}">
+              ${r.tipe === 'Hilang' ? '😟 Hilang' : '🤲 Temuan'}
+            </span>
+          </td>
+          <td>
+            <div style="font-weight:600;font-size:0.875rem;">${r.barang}</div>
+          </td>
+          <td style="font-size:0.82rem;">
+            ${KAT_ICON[r.kategori] || '📦'} ${r.kategori}
+          </td>
+          <td style="font-size:0.82rem;">📍 ${r.lokasi}</td>
+          <td style="font-size:0.8rem;color:var(--gray);">${fmtTgl(r.tanggal)}</td>
+          <td>
+            <div style="font-size:0.82rem;font-weight:600;">${r.nama}</div>
+            <div style="font-size:0.75rem;color:var(--gray);">${r.nim}</div>
+          </td>
+          <td>${badgeHtml(r.status)}</td>
+          <td onclick="event.stopPropagation()">
+            <div style="display:flex;gap:4px;flex-wrap:wrap;">
+              ${r.status === 'Hilang' ? `
+                <button class="btn-sm-green" onclick="ubahStatus('${r.id}','Ditemukan')">✔ Ditemukan</button>
+              ` : ''}
+              ${r.status === 'Ditemukan' ? `
+                <button class="btn-sm-blue" onclick="ubahStatus('${r.id}','Diklaim')">🤝 Diklaim</button>
+              ` : ''}
+              ${r.status === 'Diklaim' ? `
+                <span style="font-size:0.75rem;color:var(--green);font-weight:600;">✅ Selesai</span>
+              ` : ''}
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Stats
+    document.getElementById('s-total').textContent   = data.length;
+    document.getElementById('s-hilang').textContent  = data.filter(r => r.status === 'Hilang').length;
+    document.getElementById('s-selesai').textContent = data.filter(r => r.status === 'Diklaim').length;
+    document.getElementById('tbl-info').textContent  = `Menampilkan ${filtered.length} dari ${data.length} laporan`;
+  }
+
+  // ── UBAH STATUS ──
+  function ubahStatus(id, status) {
+    const data = getData();
+    const r = data.find(x => x.id === id);
+    if (!r) return;
+    r.status = status;
+    saveData(data); render();
+    const label = { Ditemukan:'ditandai ditemukan ✔', Diklaim:'berhasil diklaim 🤝' };
+    showToast(`Laporan ${id} ${label[status]}`, 'ok');
+  }
+
+  // ── DETAIL ──
+  function showDetail(id) {
+    const data = getData();
+    const r = data.find(x => x.id === id);
+    if (!r) return;
+
+    document.getElementById('detail-body').innerHTML = `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;font-size:0.875rem;">
+        <div>
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:var(--gray);margin-bottom:3px;">ID Laporan</div>
+          <strong style="color:var(--blue2);font-size:1.1rem;">${r.id}</strong>
+        </div>
+        <div>
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:var(--gray);margin-bottom:3px;">Status</div>
+          ${badgeHtml(r.status)}
+        </div>
+        <div>
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:var(--gray);margin-bottom:3px;">Tipe</div>
+          <span class="tipe-badge ${r.tipe === 'Hilang' ? 'tipe-hilang' : 'tipe-temuan'}">
+            ${r.tipe === 'Hilang' ? '😟 Hilang' : '🤲 Temuan'}
+          </span>
+        </div>
+        <div>
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:var(--gray);margin-bottom:3px;">Kategori</div>
+          ${KAT_ICON[r.kategori] || '📦'} ${r.kategori}
+        </div>
+        <div style="grid-column:1/-1;">
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:var(--gray);margin-bottom:3px;">Nama Barang</div>
+          <strong style="font-size:1rem;">${r.barang}</strong>
+        </div>
+        <div>
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:var(--gray);margin-bottom:3px;">Lokasi</div>
+          📍 ${r.lokasi}
+        </div>
+        <div>
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:var(--gray);margin-bottom:3px;">Tanggal</div>
+          ${fmtTgl(r.tanggal)}
+        </div>
+        <div>
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:var(--gray);margin-bottom:3px;">Pelapor</div>
+          ${r.nama}
+        </div>
+        <div>
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:var(--gray);margin-bottom:3px;">NIM</div>
+          ${r.nim}
+        </div>
+        <div style="grid-column:1/-1;">
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:var(--gray);margin-bottom:3px;">Kontak WhatsApp</div>
+          <a href="https://wa.me/62${r.telepon.slice(1)}" target="_blank"
+             style="color:var(--blue2);font-weight:600;text-decoration:none;">
+            📱 ${r.telepon} (Hubungi via WhatsApp)
+          </a>
+        </div>
+        ${r.ciri ? `
+        <div style="grid-column:1/-1;">
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:var(--gray);margin-bottom:3px;">Ciri-ciri Khusus</div>
+          <div style="background:var(--bg);border-radius:8px;padding:12px;font-size:0.85rem;line-height:1.6;">${r.ciri}</div>
+        </div>` : ''}
+      </div>
+    `;
+    document.getElementById('overlay-detail').classList.add('show');
+  }
+
+  ['detail-close','detail-close2'].forEach(id =>
+    document.getElementById(id).addEventListener('click', () =>
+      document.getElementById('overlay-detail').classList.remove('show')));
+  document.getElementById('overlay-detail').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('show');
+  });
+
+  document.getElementById('search').addEventListener('input', render);
+  document.getElementById('filter-tipe').addEventListener('change', render);
+  document.getElementById('filter-status').addEventListener('change', render);
+  document.getElementById('filter-kat').addEventListener('change', render);
+
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    if (!confirm('Hapus semua data laporan?')) return;
+    localStorage.removeItem('fi_data');
+    localStorage.removeItem('fi_counter');
+    render();
+    showToast('Semua data dihapus', 'err');
+  });
+
+  render();
+</script>
+</body>
+</html>

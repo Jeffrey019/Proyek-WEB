@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindIt! – Lost & Found</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a class="logo" href="index.html">🔎FindIt <span class="brand-dot">!</span></a>
+
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-toggle-label">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active">Beranda</a></li>
+                    <li><a href="lapor.html">Lapor Barang</a></li>
+                    <li><a href="daftar.html">Daftar Barang</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container hero-inner">
+
+                <!-- KIRI -->
+                <div class="hero-content">
+                    <div class="hero-badge">🎓 Khusus Mahasiswa & Civitas Mikroskil</div>
+                    <h1>Barang Hilang? <span>Temukan di Sini.</span></h1>
+                    <p>Platform Lost & Found resmi Universitas Mikroskil.<br> Laporkan barang atau temukan barang, dan bantu sesama civitas kampus.</p>
+                    <div class="hero-buttons">
+                        <a href="lapor.html" class="btn btn-primary">📋 Lapor Sekarang</a>
+                        <a href="daftar.html" class="btn btn-outline">🔍 Cari Barang</a>
+                    </div>
+                </div>
+
+                <!-- KANAN (NANTI GAMBAR) -->
+                <div class="hero-image">
+                    <img src="gambar/hero.png">
+                    <!-- Bisa isi gambar / ilustrasi nanti -->
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- CARA KERJA -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Cara Kerja FindIt!</h2>
+                    <p>Mudah, cepat, dan gratis untuk seluruh civitas Mikroskil</p>
+                </div>
+                <!-- ARTIKEL -->
+                <div class="steps-grid">
+                    <article class="step">
+                        <div class="step-icon">📋</div>
+                        <h3>Lapor Barang</h3>
+                        <p>Isi form laporan barang hilang atau temuan, lengkap dengan deskripsi dan lokasi.</p>
+                    </article>
+
+                    <article class="step">
+                        <div class="step-icon">🔍</div>
+                        <h3>Cari & Cocokkan</h3>
+                        <p>Semua laporan ditampilkan. Cari berdasarkan kategori, lokasi, atau kata kunci.</p>
+                    </article>
+
+                    <article class="step">
+                        <div class="step-icon">🤝</div>
+                        <h3>Klaim & Selesai</h3>
+                        <p>Hubungi pelapor jika menemukan barang Anda, lalu admin akan mengonfirmasi.</p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+        <hr>
+
+
+        <!-- BARANG SERING HILANG -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-header">
+                    <h2>Barang Yang Sering Hilang</h2>
+                    <p>Beberapa jenis barang yang paling sering dilaporkan hilang atau ditemukan.</p>
+                </div>
+
+                <div class="items">
+
+                    <article class="item">
+                        <div class="item-icon"><img src="gambar/elektronik.jpg"></div>
+                        <h3>Elektronik</h3>
+                        <p>Laptop, handphone, charger, dan perangkat lainnya.</p>
+                    </article>
+
+                    <article class="item">
+                        <div class="item-icon"><img src="gambar/tas.jpg"></div>
+                        <h3>Dompet & Tas</h3>
+                        <p>Dompet, tas ransel, atau tas selempang.</p>
+                    </article>
+
+                    <article class="item">
+                        <div class="item-icon"><img src="gambar/kartu.png"></div>
+                        <h3>Kartu Identitas</h3>
+                        <p>KTM, KTP, kartu ATM, dan lainnya.</p>
+                    </article>
+
+                    <article class="item">
+                        <div class="item-icon"><img src="gambar/kunci.jpg"></div>
+                        <h3>Kunci</h3>
+                        <p>Kunci motor, mobil, atau ruangan.</p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+        <hr>
+
+        <!-- CTA -->
+        <section class="section">
+            <div class="container">
+                    <div class="cta">
+                        <h2>Temukan Barang Anda Hari Ini</h2>
+                        <p>Bergabung dengan mahasiswa Mikroskil yang sudah menggunakan FindIt!</p>
+                        <a href="lapor.html" class="btn btn-primary">📋 Lapor Sekarang</a>
+                    </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p><strong>FindIt! </strong> &mdash; Platform Lost & Found Universitas Mikroskil &bull; 2026</p>
+        </div>
+    </footer>
+
+</body>
+</html>

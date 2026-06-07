@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindIt! – Lapor Barang</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a class="logo" href="index.html">🔎FindIt <span class="brand-dot">!</span></a>
+
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-toggle-label">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="lapor.html" class="active">Lapor Barang</a></li>
+                    <li><a href="daftar.html">Daftar Barang</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Lapor <span>Barang</span></h1>
+                <p>Laporkan barang hilang atau temuan di lingkungan Mikroskil</p>
+            </div>
+        </section>
+
+        <!-- LAYOUT 2 KOLOM -->
+        <div class=" container lapor-layout">
+            <!-- KIRI: FORM -->
+            <div class="form-card">
+                <h2>📋 Form Laporan</h2>
+                <p>Isi data dengan lengkap agar mudah ditemukan</p>
+                <form>
+                    <div class="form-group">
+                        <label for="tipe">TIPE LAPORAN *</label>
+                        <select id="tipe" required>
+                            <option value="">-- Pilih Tipe --</option>
+                            <option>😟 Barang Hilang</option>
+                            <option>🤲 Barang Temuan</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nama">NAMA PELAPOR *</label>
+                            <input type="text" id="nama" placeholder="Nama lengkap Anda" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nim">NIM *</label>
+                            <input type="text" id="nim" placeholder="Contoh: 241122026" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telepon">NO. WHATSAPP *</label>
+                        <input type="tel" id="telepon" placeholder="08xxxxxxxxxx" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="kategori">KATEGORI BARANG *</label>
+                            <select id="kategori" required>
+                                <option value="">-- Pilih --</option>
+                                <option>💻 Elektronik</option>
+                                <option>👜 Dompet & Tas</option>
+                                <option>🪪 KTM / Kartu</option>
+                                <option>🔑 Kunci</option>
+                                <option>📚 Buku & Alat Tulis</option>
+                                <option>👕 Pakaian</option>
+                                <option>📦 Lainnya</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal">TANGGAL KEJADIAN *</label>
+                            <input type="date" id="tanggal" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="barang">NAMA / DESKRISPSI BARANG *</label>
+                        <input type="text" id="barang" placeholder="Contoh: Laptop ASUS VivoBook warna abu-abu"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lokasi">LOKASI KEJADIAN *</label>
+                        <select id="lokasi" required>
+                            <option value="">-- Pilih Lokasi --</option>
+                            <option>🏫 Gedung A</option>
+                            <option>🏫 Gedung B</option>
+                            <option>🏫 Gedung C</option>
+                            <option>📚 Perpustakaan</option>
+                            <option>🍽️ Kantin</option>
+                            <option>🅿️ Area Parkir</option>
+                            <option>🚻 Toilet</option>
+                            <option>📍 Lokasi Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ciri">CIRI-CIRI KHUSUS</label>
+                        <textarea id="ciri"
+                            placeholder="Contoh: ada stiker kucing, tali warna merah, nama tertulis di dalam... (opsional)"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">📋 Kirim Laporan</button>
+                </form>
+            </div>
+
+            <!-- KANAN: INFO -->
+            <div class="info-sidebar">
+                <div class="info-box">
+                    <strong>😟 Barang Hilang</strong>
+                    <p>Gunakan form ini jika kamu kehilangan barang di area kampus Mikroskil.</p>
+                </div>
+                <div class="info-box">
+                    <strong>🤲 Barang Temuan</strong>
+                    <p>Jika kamu menemukan barang milik orang lain, laporkan agar bisa dikembalikan ke pemiliknya.</p>
+                </div>
+                <div class="info-box">
+                    <strong>⚡ Proses Klaim</strong>
+                    <p>
+                        1. Laporan masuk ke sistem<br />
+                        2. Pemilik menghubungi pelapor<br />
+                        3. Verifikasi & barang dikembalikan<br />
+                        4. Status diupdate menjadi Diklaim
+                    </p>
+                </div>
+                <div class="info-box">
+                    <strong>📞 Butuh Bantuan?</strong>
+                    <p>Hubungi admin kemahasiswaan Mikroskil.</p>
+                </div>
+                <div style="text-align:center;margin-top:12px;">
+                    <a href="daftar.html" class="btn-daftar">🔍 Lihat Daftar </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p><strong>FindIt! </strong> &mdash; Platform Lost & Found Universitas Mikroskil &bull; 2026</p>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>
