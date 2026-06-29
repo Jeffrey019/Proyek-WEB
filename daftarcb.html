@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindIt! – Daftar Barang</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Desain Tabel Sederhana agar Selaras dengan Tema */
+        .table-container { overflow-x: auto; margin-top: 20px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th, td { padding: 12px 15px; border-bottom: 1px solid #e2e8f0; }
+        th { background-color: #1e40af; color: white; }
+        .btn-delete { background-color: #ef4444; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 14px; border: none; cursor: pointer;}
+        .btn-edit { background-color: #f59e0b; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 14px; margin-right: 5px;}
+    </style>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a class="logo" href="index.html">🔎FindIt <span class="brand-dot">!</span></a>
+
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-toggle-label">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="lapor.html">Lapor Barang</a></li>
+                    <li><a href="daftar.html" class="active">Daftar Barang</a></li>
+                </ul>
+            </nav> 
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Daftar <span>Barang</span></h1>
+                <p>Semua laporan barang hilang dan temuan di Mikroskil</p>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Pelapor</th>
+                            <th>Nama Barang</th>
+                            <th>Kategori</th>
+                            <th>Tanggal</th>
+                            <th>Deskripsi & Lokasi</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p><strong>FindIt! </strong> &mdash; Platform Lost & Found Universitas Mikroskil &bull; 2026</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
